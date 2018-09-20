@@ -1,0 +1,43 @@
+Scrappy Word To Do next
+Feb 2018
+
+--fix last tileset so that only tiles with letters show and no blank tiles -- DONE
+--add bonus score (30 points) for getting all six right -- DONE
+--add bonus score (30 points) for not playing any non-words ?? -- DONE
+--add preferences to save top score (untimed) -- DONE
+--add logic to save all words in an array and then play them back at the end 
+--add HUD showing score info -- current score and top score NEXT
++ show all additions and subtractions from score as they occur
+--add each letter's positive point value to the tiles in UI display NEXT
+
+
+
+later..
+
+--add timer verison and make it the default option
+--untimed will be the optional playmode
+--two high scores saved in record book -- timed and untimed
+
+REBOOT BOBBY JR. -- beginning September 2018
+
+--removing negative scoring DONE
+
+--change logic so that trades for letters use the existing pool DONE
+
+--make it so that, if a trade can't happen, message displays on screen and tradeStock isn't decremented DONE
+
+--make display of what letters remain DONE
+
+--arrow from 'trade letter' to first tile, outline trade button DONE
+
+--make it seven tiles
+--add more bonuses? six tile bonus, seven tile bonus, others....plus, write out all bonuses on end screen. ON DECK
+--refactor and reorganize ON DECK
+--work on letter distribution problem (too many consonants at start)
+--update help/docs
+--check if timed version bugs still exist
+--ui improvements -- textured backgrounds, textured tiles, better colors, FONTS, layout refinements, etc. IN PROGRESS
+--more feedback from BOBBY JR.
+--???
+
+
