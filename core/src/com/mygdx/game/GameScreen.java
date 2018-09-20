@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -514,9 +515,11 @@ public class GameScreen implements Screen, InputProcessor {
         } else {
 
             // it's the end of the game
+
+            // add 30 point bonus to score and register 'All Words' bonus in bonuses hashmap
             if (noNonWords) {
                 score += 30;
-                System.out.println("You got a 30 point bonus for playing all valid words");
+                scoringTable.setBonusValue("All Words", 1);
             }
 
             if (playType==0) {
@@ -539,7 +542,8 @@ public class GameScreen implements Screen, InputProcessor {
             }
 
             // set to endscreen
-            game.setScreen(new EndScreen(wordsPlayed, score, playType, game));
+            HashMap bonuses = scoringTable.getBonuses();
+            game.setScreen(new EndScreen(wordsPlayed, score, playType, bonuses, game));
         }
 
 

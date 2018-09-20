@@ -21,7 +21,10 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jackwa on 1/5/18.
@@ -33,9 +36,11 @@ public class EndScreen implements Screen, InputProcessor {
     private ScreenViewport textViewport;
     private Camera textCamera;
     private BitmapFont font;
+    private BitmapFont headerFont;
     private SpriteBatch batch;
     private int score;
     private int playType;
+    private HashMap bonuses;
     private Preferences prefs;
 
     private TextureRegion backgroundTexture;
@@ -47,11 +52,13 @@ public class EndScreen implements Screen, InputProcessor {
 
     private List<String> wordsPlayed;
 
-    public EndScreen(List<String> words, int score, int playType, Game game) {
+    public EndScreen(List<String> words, int score, int playType, HashMap bonuses, Game game) {
         this.wordsPlayed = words;
         this.score = score;
         this.playType = playType;
+        this.bonuses = bonuses;
         this.game = game;
+
     }
 
     @Override
@@ -62,6 +69,7 @@ public class EndScreen implements Screen, InputProcessor {
         textViewport = new ScreenViewport();
         textCamera = textViewport.getCamera();
         font = new FontHandler("fonts/Eczar-Medium.ttf",15).getBitmapFont();
+        headerFont = new FontHandler("fonts/FFF_Tusj.ttf", 40).getBitmapFont();
         font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         font.getData().setScale(3f);
         font.setColor(Color.BLACK);
@@ -96,8 +104,8 @@ public class EndScreen implements Screen, InputProcessor {
         batch.setProjectionMatrix(textCamera.combined);
         batch.begin();
         Vector3 creditsInScreenCoords = camera.project(new Vector3(Constants.X_CREDITS, Constants.Y_CREDITS, 0));
-        font.getData().setScale(2.4f);
-        font.draw(batch, "GAME COMPLETE" + "\n", creditsInScreenCoords.x, creditsInScreenCoords.y);
+        headerFont.setColor(Color.BLACK);
+        headerFont.draw(batch, "GAME COMPLETE" + "\n", creditsInScreenCoords.x, creditsInScreenCoords.y);
         font.getData().setScale(1.2f);
 
         // get top score and compare to current store to see if congratulations are in order
@@ -116,6 +124,18 @@ public class EndScreen implements Screen, InputProcessor {
                 font.draw(batch, "For comparison, the current top score is " + topScore, creditsInScreenCoords.x, creditsInScreenCoords.y - 60f);
         }
 
+        String bonusesScored = "";
+        Iterator it = bonuses.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            if ((Integer)pair.getValue() > 0) {
+                bonusesScored += pair.getKey() + " (" + pair.getValue() + ")";
+                if (it.hasNext()) {
+                    bonusesScored += "\n ";
+                }
+        }
+    }
+        font.draw(batch, "Bonuses achieved : " + bonusesScored, creditsInScreenCoords.x, creditsInScreenCoords.y - 80f);
 
         String words = "";
         words = words + "\n";
@@ -126,10 +146,12 @@ public class EndScreen implements Screen, InputProcessor {
                 words = words + "\n";
             }
         }
-        font.draw(batch, "You played the following valid words: ", creditsInScreenCoords.x, creditsInScreenCoords.y - 80f);
+        font.draw(batch, "You played the following valid words: ", creditsInScreenCoords.x, creditsInScreenCoords.y - 140f);
 
-        // draw words in a loop so that there is only so much per line
-        font.draw(batch, words, creditsInScreenCoords.x, creditsInScreenCoords.y - 100f);
+        // draw words
+        font.draw(batch, words, creditsInScreenCoords.x, creditsInScreenCoords.y - 160f);
+
+
 
 
 

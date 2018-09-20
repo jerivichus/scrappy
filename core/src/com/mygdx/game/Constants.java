@@ -106,7 +106,7 @@ public class Constants {
     public static final float X_CREDITS = WORLD_SIZE / 3f;
     public static final float Y_CREDITS = WORLD_SIZE / 1.2f;
     public static final float CRED_BUTTON_X = X_CREDITS;
-    public static final float CRED_BUTTON_Y = 20f;
+    public static final float CRED_BUTTON_Y = 5f;
 
     // timer constants
     public static final int STANDARD_TIME_ALLOTTED = 45;

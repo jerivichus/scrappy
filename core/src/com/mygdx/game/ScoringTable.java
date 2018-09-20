@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class ScoringTable {
 
     private HashMap<String,Integer> table;
+    private HashMap<String, Integer> bonuses;
 
     public ScoringTable() {
         initScoringTable();
@@ -54,11 +55,27 @@ public class ScoringTable {
         table.put("Q", 20);
         table.put("Z", 20);
 
+
+        // init bonuses
+        bonuses = new HashMap<String, Integer>();
+        bonuses.put("6 Letter Word", 0);
+        bonuses.put("7 Letter Word", 0);
+        bonuses.put("Singular S", 0);
+        bonuses.put("All Words", 0);
+
     }
 
     public int getValue(String key) {
         return table.get(key);
 
+    }
+
+    public void setBonusValue(String key, int val) {
+        bonuses.put(key, val);
+    }
+
+    public HashMap<String,Integer> getBonuses() {
+        return bonuses;
     }
 
     public int scoreWord(String word) {
@@ -73,15 +90,30 @@ public class ScoringTable {
         }
 
         // add bonus for using every tile
-        if (word.length()==Constants.INIT_NUM_TILES - 1) {
-            thisScore += 30;
-            System.out.println("You got a thirty point bonus for playing a six letter word!");
-        } else if (word.length()==Constants.INIT_NUM_TILES) {
-            thisScore += 40;
-            System.out.println("You got a forty point bonus for playing a seven letter word!");
-        }
+        thisScore = handleBonuses(word, thisScore);
 
         return thisScore;
 
+    }
+
+    private int handleBonuses(String word, int score) {
+
+        // add five point bonus for using 's' if the word doesn't end with s
+        if (word.contains("S")) {
+            if (word.charAt(word.length()-1) != ('S')) {
+                score += 5;
+                bonuses.put("Singular S", bonuses.get("Singular S") + 1);
+            }
+        }
+
+        // add bonus for using every tile
+        if (word.length()==Constants.INIT_NUM_TILES - 1) {
+            score += 30;
+            bonuses.put("6 Letter Word", bonuses.get("6 Letter Word") + 1);
+        } else if (word.length()==Constants.INIT_NUM_TILES) {
+            score += 40;
+            bonuses.put("7 Letter Word", bonuses.get("7 Letter Word") + 1);
+        }
+        return score;
     }
 }
