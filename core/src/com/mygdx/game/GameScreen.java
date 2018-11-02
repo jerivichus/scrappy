@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -103,7 +104,11 @@ public class GameScreen implements Screen, InputProcessor {
         renderer = new MyShapeRenderer();
         renderer.setAutoShapeType(true);
         batch = new SpriteBatch();
-        font = new FontHandler("fonts/Eczar-Medium.ttf",15).getBitmapFont();
+        ApplicationType appType = Gdx.app.getType();
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+            font = new FontHandler("fonts/Eczar-Medium.ttf", 25).getBitmapFont();
+        } else { font = new FontHandler("fonts/Eczar-Medium.ttf", 15).getBitmapFont();
+        } //if its a desktop
         font.setColor(Constants.BUTTON_TEXT_COLOR);
         font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         Texture bgTexture = new Texture(Gdx.files.internal("images/purty_wood.png"));
@@ -304,19 +309,26 @@ public class GameScreen implements Screen, InputProcessor {
         Vector3 letterBagRowFive = camera.project(new Vector3(Constants.LETTERBAG_ROW1_XPOS, Constants.LETTERBAG_ROW1_YPOS - 20f, 0));
 
         // row one
+        ApplicationType appType = Gdx.app.getType();
+        float letterBagOffset;
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+            letterBagOffset = Constants.LETTERBAG_OFFSET + 100f;
+        } else {
+            letterBagOffset = Constants.LETTERBAG_OFFSET;
+        }
         int iterator = 0;
         for (Map.Entry<Character,Integer> entry : LetterBag.lmap.entrySet()) {
 
             if (iterator < 6) {
-                font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowOne.x + ((iterator % 6) * Constants.LETTERBAG_OFFSET), letterBagRowOne.y);
+                font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowOne.x + ((iterator % 6) * letterBagOffset), letterBagRowOne.y);
             } else if (iterator >= 6 && iterator < 12) {
-                font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowTwo.x + ((iterator % 6) * Constants.LETTERBAG_OFFSET), letterBagRowTwo.y);
+                font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowTwo.x + ((iterator % 6) * letterBagOffset), letterBagRowTwo.y);
             } else if (iterator >= 12 &&  iterator < 18) {
-                font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowThree.x + ((iterator % 6) * Constants.LETTERBAG_OFFSET), letterBagRowThree.y);
+                font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowThree.x + ((iterator % 6) * letterBagOffset), letterBagRowThree.y);
             } else if (iterator >= 18 && iterator < 24 ){
-                font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowFour.x + ((iterator % 6) * Constants.LETTERBAG_OFFSET), letterBagRowFour.y);
+                font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowFour.x + ((iterator % 6) * letterBagOffset), letterBagRowFour.y);
             } else {
-                font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowFive.x + ((iterator % 6) * Constants.LETTERBAG_OFFSET), letterBagRowFive.y);
+                font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowFive.x + ((iterator % 6) * letterBagOffset), letterBagRowFive.y);
             }
             iterator++;
         }

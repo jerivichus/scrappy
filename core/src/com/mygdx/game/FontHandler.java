@@ -12,6 +12,8 @@ public class FontHandler {
     private String text;
     private BitmapFont bitmapFont;
 
+
+
     public FontHandler(String file, int size) {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(file));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();

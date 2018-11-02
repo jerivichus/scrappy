@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -48,7 +49,11 @@ public class HelpScreen implements Screen, InputProcessor {
         camera = viewport.getCamera();
         textViewport = new ScreenViewport();
         textCamera = textViewport.getCamera();
-        font = new FontHandler("fonts/Eczar-Medium.ttf",15).getBitmapFont();
+        ApplicationType appType = Gdx.app.getType();
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+            font = new FontHandler("fonts/Eczar-Medium.ttf", 25).getBitmapFont();
+        } else { font = new FontHandler("fonts/Eczar-Medium.ttf", 15).getBitmapFont();
+        } //if its a desktop
         batch = new SpriteBatch();
 
         renderer = new MyShapeRenderer();
@@ -86,13 +91,11 @@ public class HelpScreen implements Screen, InputProcessor {
         // do here
         font.setColor(Color.BLACK);
         Vector3 helpTextInScreenCoords = camera.project(new Vector3(10, Constants.WORLD_SIZE - 5, 0));
-        font.draw(batch, "--You will receive 17 sets of 6 letters each. For each set, try to make the highest-scored word possible.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y, 500, 200, true);
-        font.draw(batch, "--Make words by arranging the letter tiles (swiping right or left). Discard unnecessary tiles by touching the 'X' button in the upper right corner of each tile. Touch the submit button to submit your word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 50, 500, 200, true);
-        font.draw(batch, "--Invalid words are 30 points off your score, and valid words are scored according to the value of each letter used (displayed on the letter's tile).\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 115, 500, 200, true);
-        font.draw(batch, "--Also, 5 points are removed for each letter tile discarded, so there is a benefit to using as many tiles in each set as possible.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y-165, 500, 200, true);
-        font.draw(batch, "--Letter tiles are swiped left or right one at a time. You can also use the shuffle button to shuffle the tiles randomly.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 215, 500, 200, true);
-        font.draw(batch, "--There is a 30 point bonus for using all 6 letter tiles in a set.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 265, 500, 200, true);
-        font.draw(batch, "--For each set, you have the option to replace two vowels and two consonants. Vowels replace consonants; consonants replace vowels. The first tile from the left is replaced.", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 295, 500, 200, true);
+        font.draw(batch, "--You will receive 15 sets of 7 letters each. For each set, try to make the highest-scoring word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y, 500, 200, true);
+        font.draw(batch, "--Make words by arranging the letter tiles (swiping right or left). Discard unnecessary tiles by touching the 'X' button on each tile.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 75, 500, 200, true);
+        font.draw(batch, "--Touch the submit button to submit a word. Valid words are scored according to the value of each letter used (displayed on the letter's tile).\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 150, 500, 200, true);
+        font.draw(batch, "--There is a 30 point bonus for creating a 6 letter word, and a 40 point bonus for a 7 letter word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 225, 500, 200, true);
+        font.draw(batch, "--For each set, you have the option to trade the left-most tile 4 times. Vowels replace consonants; consonants replace vowels.", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 300, 500, 200, true);
         batch.end();
 
         // draw button

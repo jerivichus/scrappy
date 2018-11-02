@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -59,8 +60,15 @@ public class MainMenuScreen extends InputAdapter  implements Screen {
         renderer = new MyShapeRenderer();
         renderer.setAutoShapeType(true);
         batch = new SpriteBatch();
-        headerFont = new FontHandler("fonts/FFF_Tusj.ttf", 60).getBitmapFont();
-        font = new FontHandler("fonts/Eczar-Medium.ttf", 15).getBitmapFont();
+
+        ApplicationType appType = Gdx.app.getType();
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+            font = new FontHandler("fonts/Eczar-Medium.ttf", 25).getBitmapFont();
+            headerFont = new FontHandler("fonts/FFF_Tusj.ttf", 100).getBitmapFont();
+        } else { font = new FontHandler("fonts/Eczar-Medium.ttf", 15).getBitmapFont();
+            headerFont = new FontHandler("fonts/FFF_Tusj.ttf", 60).getBitmapFont();
+        } //if its a desktop
+
         font.setColor(Constants.BUTTON_TEXT_COLOR);
         font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         Texture bgTexture = new Texture(Gdx.files.internal("images/purty_wood.png"));

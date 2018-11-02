@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -68,8 +69,13 @@ public class EndScreen implements Screen, InputProcessor {
         camera = viewport.getCamera();
         textViewport = new ScreenViewport();
         textCamera = textViewport.getCamera();
-        font = new FontHandler("fonts/Eczar-Medium.ttf",15).getBitmapFont();
-        headerFont = new FontHandler("fonts/FFF_Tusj.ttf", 40).getBitmapFont();
+        ApplicationType appType = Gdx.app.getType();
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+            font = new FontHandler("fonts/Eczar-Medium.ttf", 25).getBitmapFont();
+            headerFont = new FontHandler("fonts/FFF_Tusj.ttf", 80).getBitmapFont();
+        } else { font = new FontHandler("fonts/Eczar-Medium.ttf", 15).getBitmapFont();
+            headerFont = new FontHandler("fonts/FFF_Tusj.ttf", 40).getBitmapFont();
+        } //if its a desktop
         font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         font.getData().setScale(3f);
         font.setColor(Color.BLACK);
@@ -126,13 +132,20 @@ public class EndScreen implements Screen, InputProcessor {
 
         String bonusesScored = "";
         Iterator it = bonuses.entrySet().iterator();
+        int bonusCount = 0;
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
+
             if ((Integer)pair.getValue() > 0) {
+                bonusCount++;
                 bonusesScored += pair.getKey() + " (" + pair.getValue() + ")";
                 if (it.hasNext()) {
-                    bonusesScored += "\n ";
+                    bonusesScored += " ";
                 }
+                if (bonusCount > 2) {
+                    bonusesScored += "\n";
+                }
+
         }
     }
         font.draw(batch, "Bonuses achieved : " + bonusesScored, creditsInScreenCoords.x, creditsInScreenCoords.y - 80f);
@@ -146,7 +159,7 @@ public class EndScreen implements Screen, InputProcessor {
                 words = words + "\n";
             }
         }
-        font.draw(batch, "You played the following valid words: ", creditsInScreenCoords.x, creditsInScreenCoords.y - 140f);
+        font.draw(batch, "You played the following valid words: ", creditsInScreenCoords.x, creditsInScreenCoords.y - 150f);
 
         // draw words
         font.draw(batch, words, creditsInScreenCoords.x, creditsInScreenCoords.y - 160f);

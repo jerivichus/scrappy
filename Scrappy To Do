@@ -30,13 +30,14 @@ REBOOT BOBBY JR. -- beginning September 2018
 
 --arrow from 'trade letter' to first tile, outline trade button DONE
 
---make it seven tiles
+--make it seven tiles DONE
 --add more bonuses? six tile bonus, seven tile bonus, others....plus, write out all bonuses on end screen. IN PROGRESS
 --refactor and reorganize ON DECK
 --work on letter distribution problem (too many consonants at start)
---update help/docs
+--update help/docs DONE
 --check if timed version bugs still exist
 --ui improvements -- textured backgrounds, textured tiles, better colors, FONTS, layout refinements, etc. IN PROGRESS
+--scale fonts for android
 --more feedback from BOBBY JR.
 --???
 

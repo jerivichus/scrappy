@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 /**
@@ -46,6 +48,7 @@ public class Constants {
     public static final float LETTERBAG_ROW1_XPOS = WORLD_SIZE - 40f;
     public static final float LETTERBAG_ROW1_YPOS = WORLD_SIZE / 1.2f;
     public static final float LETTERBAG_FONT_SIZE = 1f;
+    ApplicationType appType = Gdx.app.getType();
     public static final float LETTERBAG_OFFSET = 45f;
 
     // submit button
@@ -104,7 +107,7 @@ public class Constants {
 
     // end screen
     public static final float X_CREDITS = WORLD_SIZE / 3f;
-    public static final float Y_CREDITS = WORLD_SIZE / 1.2f;
+    public static final float Y_CREDITS = WORLD_SIZE - 10f;
     public static final float CRED_BUTTON_X = X_CREDITS;
     public static final float CRED_BUTTON_Y = 5f;
 
