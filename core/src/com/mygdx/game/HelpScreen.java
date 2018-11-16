@@ -90,12 +90,26 @@ public class HelpScreen implements Screen, InputProcessor {
 
         // do here
         font.setColor(Color.BLACK);
-        Vector3 helpTextInScreenCoords = camera.project(new Vector3(10, Constants.WORLD_SIZE - 5, 0));
-        font.draw(batch, "--You will receive 15 sets of 7 letters each. For each set, try to make the highest-scoring word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y, 500, 200, true);
-        font.draw(batch, "--Make words by arranging the letter tiles (swiping right or left). Discard unnecessary tiles by touching the 'X' button on each tile.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 75, 500, 200, true);
-        font.draw(batch, "--Touch the submit button to submit a word. Valid words are scored according to the value of each letter used (displayed on the letter's tile).\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 150, 500, 200, true);
-        font.draw(batch, "--There is a 30 point bonus for creating a 6 letter word, and a 40 point bonus for a 7 letter word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 225, 500, 200, true);
-        font.draw(batch, "--For each set, you have the option to trade the left-most tile 4 times. Vowels replace consonants; consonants replace vowels.", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 300, 500, 200, true);
+        ApplicationType appType = Gdx.app.getType();
+
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+
+            Vector3 helpTextInScreenCoords = camera.project(new Vector3(10, Constants.WORLD_SIZE - 5, 0));
+            font.draw(batch, "--You will receive 15 sets of 7 letters each. For each set, try to make the highest-scoring word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y, 500, 200, false);
+            font.draw(batch, "--Make words by arranging the letter tiles (swiping right or left). Discard unnecessary tiles by touching the 'X' button on each tile.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 75, 500, 200, false);
+            font.draw(batch, "--Touch the submit button to submit a word. Valid words are scored according to the value of each letter used (displayed on the letter's tile).\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 150, 500, 200, false);
+            font.draw(batch, "--There is a 30 point bonus for creating a 6 letter word, and a 40 point bonus for a 7 letter word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 225, 500, 200, false);
+            font.draw(batch, "--For each set, you have the option to trade the left-most tile 4 times. Vowels replace consonants; consonants replace vowels.", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 300, 500, 200, false);
+
+        } else {
+            Vector3 helpTextInScreenCoords = camera.project(new Vector3(10, Constants.WORLD_SIZE - 5, 0));
+            font.draw(batch, "--You will receive 15 sets of 7 letters each. For each set, try to make the highest-scoring word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y, 500, 200, true);
+            font.draw(batch, "--Make words by arranging the letter tiles (swiping right or left). Discard unnecessary tiles by touching the 'X' button on each tile.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 75, 500, 200, true);
+            font.draw(batch, "--Touch the submit button to submit a word. Valid words are scored according to the value of each letter used (displayed on the letter's tile).\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 150, 500, 200, true);
+            font.draw(batch, "--There is a 30 point bonus for creating a 6 letter word, and a 40 point bonus for a 7 letter word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 225, 500, 200, true);
+            font.draw(batch, "--For each set, you have the option to trade the left-most tile 4 times. Vowels replace consonants; consonants replace vowels.", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 300, 500, 200, true);
+
+        }
         batch.end();
 
         // draw button
@@ -118,7 +132,12 @@ public class HelpScreen implements Screen, InputProcessor {
         Vector3 returnButtonInScreenCoords = camera.project(new Vector3(mainMenuRectangle.x, mainMenuRectangle.y, 0));
         font.setColor(Constants.BUTTON_TEXT_COLOR);
         font.getData().setScale(Constants.MESSAGE_FONT_SIZE);
-        font.draw(batch, "MAIN MENU", returnButtonInScreenCoords.x + 25f, returnButtonInScreenCoords.y + 40f);
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+            font.draw(batch, "MAIN MENU", returnButtonInScreenCoords.x + 25f, returnButtonInScreenCoords.y + 80f);
+        } else {
+            font.draw(batch, "MAIN MENU", returnButtonInScreenCoords.x + 25f, returnButtonInScreenCoords.y + 40f);
+        }
+
 
         font.setColor(Color.BLACK);
         font.getData().setScale(1);

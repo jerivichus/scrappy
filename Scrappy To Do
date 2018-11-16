@@ -18,6 +18,8 @@ later..
 --untimed will be the optional playmode
 --two high scores saved in record book -- timed and untimed
 
+---------------------------------------------------------------------------------------------------
+
 REBOOT BOBBY JR. -- beginning September 2018
 
 --removing negative scoring DONE
@@ -31,13 +33,14 @@ REBOOT BOBBY JR. -- beginning September 2018
 --arrow from 'trade letter' to first tile, outline trade button DONE
 
 --make it seven tiles DONE
---add more bonuses? six tile bonus, seven tile bonus, others....plus, write out all bonuses on end screen. IN PROGRESS
---refactor and reorganize ON DECK
---work on letter distribution problem (too many consonants at start)
+--add more bonuses? six tile bonus, seven tile bonus, others....plus, write out all bonuses on end screen. IN PROGRESS ???
+--refactor and reorganize TODO
+--work on letter distribution problem (too many consonants at start) TODO
 --update help/docs DONE
---check if timed version bugs still exist
+--check if timed version bugs still exist TODO*
 --ui improvements -- textured backgrounds, textured tiles, better colors, FONTS, layout refinements, etc. IN PROGRESS
---scale fonts for android
+--scale fonts for android DONE
+--scale layout/positions of text for android -- help screen and end screen TODO*
 --more feedback from BOBBY JR.
 --???
 

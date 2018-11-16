@@ -116,7 +116,15 @@ public class EndScreen implements Screen, InputProcessor {
 
         // get top score and compare to current store to see if congratulations are in order
 
-        font.draw(batch, "Your final score was " + score, creditsInScreenCoords.x, creditsInScreenCoords.y - 40f);
+        ApplicationType appType = Gdx.app.getType();
+
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+            font.draw(batch, "Your final score was " + score, creditsInScreenCoords.x, creditsInScreenCoords.y - 80f);
+
+        } else {
+
+            font.draw(batch, "Your final score was " + score, creditsInScreenCoords.x, creditsInScreenCoords.y - 40f);
+        }
         int topScore = 0;
         // if timed game
         if (playType == 0) {
@@ -125,9 +133,20 @@ public class EndScreen implements Screen, InputProcessor {
             topScore = prefs.getInteger("topScore", 0);
         }
         if (score >= topScore) {
+            if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+                font.draw(batch, "Congratulations, you set a new high score!", creditsInScreenCoords.x, creditsInScreenCoords.y - 120f);
+
+            } else {
                 font.draw(batch, "Congratulations, you set a new high score!", creditsInScreenCoords.x, creditsInScreenCoords.y - 60f);
+
+            }
+
         } else {
-                font.draw(batch, "For comparison, the current top score is " + topScore, creditsInScreenCoords.x, creditsInScreenCoords.y - 60f);
+                if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+                    font.draw(batch, "For comparison, the current top score is " + topScore, creditsInScreenCoords.x, creditsInScreenCoords.y - 120f);
+                } else {
+                    font.draw(batch, "For comparison, the current top score is " + topScore, creditsInScreenCoords.x, creditsInScreenCoords.y - 60f);
+                }
         }
 
         String bonusesScored = "";
@@ -148,7 +167,11 @@ public class EndScreen implements Screen, InputProcessor {
 
         }
     }
-        font.draw(batch, "Bonuses achieved : " + bonusesScored, creditsInScreenCoords.x, creditsInScreenCoords.y - 80f);
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+            font.draw(batch, "Bonuses achieved : " + bonusesScored, creditsInScreenCoords.x, creditsInScreenCoords.y - 160f);
+        } else {
+            font.draw(batch, "Bonuses achieved : " + bonusesScored, creditsInScreenCoords.x, creditsInScreenCoords.y - 80f);
+        }
 
         String words = "";
         words = words + "\n";
@@ -159,10 +182,19 @@ public class EndScreen implements Screen, InputProcessor {
                 words = words + "\n";
             }
         }
-        font.draw(batch, "You played the following valid words: ", creditsInScreenCoords.x, creditsInScreenCoords.y - 150f);
 
-        // draw words
-        font.draw(batch, words, creditsInScreenCoords.x, creditsInScreenCoords.y - 160f);
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+            font.draw(batch, "You played the following valid words: ", creditsInScreenCoords.x, creditsInScreenCoords.y - 300f);
+
+            // draw words
+            font.draw(batch, words, creditsInScreenCoords.x, creditsInScreenCoords.y - 320f);
+
+        } else {
+            font.draw(batch, "You played the following valid words: ", creditsInScreenCoords.x, creditsInScreenCoords.y - 150f);
+
+            // draw words
+            font.draw(batch, words, creditsInScreenCoords.x, creditsInScreenCoords.y - 160f);
+        }
 
 
 
@@ -192,7 +224,11 @@ public class EndScreen implements Screen, InputProcessor {
         Vector3 returnButtonInScreenCoords = camera.project(new Vector3(mainMenuRectangle.x, mainMenuRectangle.y, 0));
         font.setColor(Constants.BUTTON_TEXT_COLOR);
         font.getData().setScale(Constants.MESSAGE_FONT_SIZE);
-        font.draw(batch, "MAIN MENU", returnButtonInScreenCoords.x + 25f, returnButtonInScreenCoords.y + 40f);
+        if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
+            font.draw(batch, "MAIN MENU", returnButtonInScreenCoords.x + 25f, returnButtonInScreenCoords.y + 80f);
+        } else {
+            font.draw(batch, "MAIN MENU", returnButtonInScreenCoords.x + 25f, returnButtonInScreenCoords.y + 40f);
+        }
 
         font.setColor(Color.BLACK);
         font.getData().setScale(1.2f);
