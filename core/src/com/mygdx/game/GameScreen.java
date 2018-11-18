@@ -158,6 +158,9 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
 
+        // for drawing specific to apptype
+        ApplicationType appType = Gdx.app.getType();
+
 
         // block trades on last round
         if (letterCount == 6) {
@@ -291,7 +294,13 @@ public class GameScreen implements Screen, InputProcessor {
             Vector3 feedbackVector = camera.project(new Vector3(Constants.SCORE_FEEDBACK_XPOS, Constants.SCORE_FEEDBACK_YPOS, 0));
             if (scoreToAdd >= 0) {
                 font.setColor(Constants.POSITIVE_COLOR);
-                font.draw(batch, "Last play: +" + scoreToAdd, feedbackVector.x, feedbackVector.y);
+                if (appType == ApplicationType.Android || appType == ApplicationType.iOS || playType == 1) {
+                    font.draw(batch, "Last play: +" + scoreToAdd, feedbackVector.x, feedbackVector.y);
+                } else {
+
+                    font.draw(batch, "Last play: +" + scoreToAdd, feedbackVector.x, feedbackVector.y - 20);
+
+                }
             }
             // reset font color
             font.setColor(Constants.BUTTON_TEXT_COLOR);
@@ -308,8 +317,7 @@ public class GameScreen implements Screen, InputProcessor {
         Vector3 letterBagRowFour = camera.project(new Vector3(Constants.LETTERBAG_ROW1_XPOS, Constants.LETTERBAG_ROW1_YPOS - 15f, 0));
         Vector3 letterBagRowFive = camera.project(new Vector3(Constants.LETTERBAG_ROW1_XPOS, Constants.LETTERBAG_ROW1_YPOS - 20f, 0));
 
-        // row one
-        ApplicationType appType = Gdx.app.getType();
+
         float letterBagOffset;
         if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
             letterBagOffset = Constants.LETTERBAG_OFFSET + 100f;
