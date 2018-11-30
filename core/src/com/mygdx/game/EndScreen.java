@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -170,7 +171,7 @@ public class EndScreen implements Screen, InputProcessor {
         if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
             font.draw(batch, "Bonuses achieved : " + bonusesScored, creditsInScreenCoords.x, creditsInScreenCoords.y - 160f);
         } else {
-            font.draw(batch, "Bonuses achieved : " + bonusesScored, creditsInScreenCoords.x, creditsInScreenCoords.y - 80f);
+            font.draw(batch, "Bonuses achieved : " + bonusesScored, creditsInScreenCoords.x, creditsInScreenCoords.y - 80f, textViewport.getScreenWidth() / 1.5f, Align.left, true);
         }
 
         String words = "";

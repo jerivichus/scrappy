@@ -19,6 +19,7 @@ public class FontHandler {
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = size;
         bitmapFont = generator.generateFont(parameter);
+        bitmapFont.getData().setLineHeight(20);
         generator.dispose();
     }
 

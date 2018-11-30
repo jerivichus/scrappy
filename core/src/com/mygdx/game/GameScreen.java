@@ -281,7 +281,7 @@ public class GameScreen implements Screen, InputProcessor {
         Vector3 rectInScreenCords = camera.project(new Vector3(submitRectangle.x + Constants.SUBMIT_TEXT_OFFSET, submitRectangle.y + Constants.SUBMIT_TEXT_OFFSET, 0));
         font.draw(batch, "PLAY WORD", rectInScreenCords.x, rectInScreenCords.y);
         Vector3 vowelRectInScreenCoords = camera.project(new Vector3(tradeRectangle.x + Constants.VOWEL_TEXT_OFFSET, tradeRectangle.y + Constants.SUBMIT_TEXT_OFFSET, 0));
-        font.draw(batch, "TRADE THIS TILE (" + tradeStock + ")", vowelRectInScreenCoords.x, vowelRectInScreenCoords.y);
+        font.draw(batch, "TRADE TILE (" + tradeStock + ")", vowelRectInScreenCoords.x, vowelRectInScreenCoords.y);
         Vector3 shuffleRectInScreenCoords = camera.project(new Vector3(shuffleRectangle.x + Constants.SUBMIT_TEXT_OFFSET, shuffleRectangle.y + Constants.SUBMIT_TEXT_OFFSET, 0));
         font.draw(batch, "SHUFFLE", shuffleRectInScreenCoords.x, shuffleRectInScreenCoords.y);
 
@@ -320,7 +320,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         float letterBagOffset;
         if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
-            letterBagOffset = Constants.LETTERBAG_OFFSET + 100f;
+            letterBagOffset = Constants.LETTERBAG_OFFSET + 75f;
         } else {
             letterBagOffset = Constants.LETTERBAG_OFFSET;
         }

@@ -63,6 +63,7 @@ public class ScoringTable {
         bonuses.put("Singular S", 0);
         bonuses.put("All Words", 0);
 
+
     }
 
     public int getValue(String key) {
@@ -115,5 +116,6 @@ public class ScoringTable {
             bonuses.put("7 Letter Word", bonuses.get("7 Letter Word") + 1);
         }
         return score;
+
     }
 }
