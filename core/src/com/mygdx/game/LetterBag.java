@@ -86,7 +86,7 @@ public class LetterBag {
     }
 
     /**
-     * Trade a vowel for a consonant from the bag, and vice versa.
+     * Trade a letter from the bag. Vowels return consonants and consonants return vowels.
      *
      * @param wasVowel True if it was a vowel, False if it was a consonant.
      * @return The opposite of the input or a blank character if none are left in the bag.
@@ -138,7 +138,7 @@ public class LetterBag {
 
 
     /**
-     * Trade a letter. Vowels return vowels, consonants return consonants.
+     * Trade a letter. Vowels return consonants and consonants return vowels.
      *
      * @param c the letter to trade
      * @return the replacement letter
@@ -176,7 +176,7 @@ public class LetterBag {
      * @return true if the letter is a vowel.
      */
     public static boolean isVowel(String s) {
-        return "AEIOU".contains(s.toUpperCase());
+        return Constants.vowels.contains(s.toUpperCase());
     }
 
     /**

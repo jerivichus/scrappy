@@ -114,6 +114,8 @@ public class Constants {
     // timer constants
     public static final int STANDARD_TIME_ALLOTTED = 45;
 
+    public static final String vowels = "AEIOU";
+
 
     private static Color toRGB(int r, int g, int b) {
         float RED = r / 255.0f;
