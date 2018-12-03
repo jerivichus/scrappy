@@ -3,7 +3,9 @@ package com.mygdx.game;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by jackwa on 1/3/18.
@@ -49,6 +51,10 @@ public class LetterBag {
         letterMap.put('Z', 1);
 
         return letterMap;
+    }
+
+    public static Set<Map.Entry<Character,Integer>> getEntrySet(){
+        return letterMap.entrySet();
     }
 
     /**
@@ -151,7 +157,7 @@ public class LetterBag {
      * @param c the character to check.
      * @return true if the character is a vowel
      */
-    public static boolean isVowel(char c) {
+    private static boolean isVowel(char c) {
         return isVowel(Character.toString(c));
     }
 
@@ -162,7 +168,7 @@ public class LetterBag {
      * @return true if the letter is a vowel.
      */
     public static boolean isVowel(String s) {
-        if (("AEIOU".indexOf(s) >= 0)) {
+        if (("AEIOU".indexOf(s.toUpperCase()) >= 0)) {
             return true;
         }
         return false;

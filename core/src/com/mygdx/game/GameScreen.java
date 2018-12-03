@@ -324,7 +324,7 @@ public class GameScreen implements Screen, InputProcessor {
             letterBagOffset = Constants.LETTERBAG_OFFSET;
         }
         int iterator = 0;
-        for (Map.Entry<Character,Integer> entry : LetterBag.lmap.entrySet()) {
+        for (Map.Entry<Character,Integer> entry : LetterBag.getEntrySet()) {
 
             if (iterator < 6) {
                 font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowOne.x + ((iterator % 6) * letterBagOffset), letterBagRowOne.y);
