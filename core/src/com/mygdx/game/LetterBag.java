@@ -7,156 +7,179 @@ import java.util.Random;
 
 /**
  * Created by jackwa on 1/3/18.
+ * Modified by wyoung on 12/02/18.
  */
 public class LetterBag {
 
-    public static HashMap<Character, Integer> lmap;
+    private static HashMap<Character, Integer> letterMap;
 
+    /**
+     * Fill the letter bag.
+     *
+     * @return the filled letter bag.
+     */
     public static HashMap initLetterMap() {
+        letterMap = new HashMap();
 
-        lmap = new HashMap();
+        letterMap.put('A', 10);
+        letterMap.put('B', 3);
+        letterMap.put('C', 2);
+        letterMap.put('D', 4);
+        letterMap.put('E', 10);
+        letterMap.put('F', 2);
+        letterMap.put('G', 3);
+        letterMap.put('H', 3);
+        letterMap.put('I', 8);
+        letterMap.put('J', 1);
+        letterMap.put('K', 2);
+        letterMap.put('L', 5);
+        letterMap.put('M', 3);
+        letterMap.put('N', 5);
+        letterMap.put('O', 9);
+        letterMap.put('P', 2);
+        letterMap.put('Q', 1);
+        letterMap.put('R', 7);
+        letterMap.put('S', 5);
+        letterMap.put('T', 7);
+        letterMap.put('U', 5);
+        letterMap.put('V', 2);
+        letterMap.put('W', 2);
+        letterMap.put('X', 1);
+        letterMap.put('Y', 2);
+        letterMap.put('Z', 1);
 
-        lmap.put('A', 10);
-        lmap.put('B', 3);
-        lmap.put('C', 2);
-        lmap.put('D', 4);
-        lmap.put('E', 10);
-        lmap.put('F', 2);
-        lmap.put('G', 3);
-        lmap.put('H', 3);
-        lmap.put('I', 8);
-        lmap.put('J', 1);
-        lmap.put('K', 2);
-        lmap.put('L', 5);
-        lmap.put('M', 3);
-        lmap.put('N', 5);
-        lmap.put('O', 9);
-        lmap.put('P', 2);
-        lmap.put('Q', 1);
-        lmap.put('R', 7);
-        lmap.put('S', 5);
-        lmap.put('T', 7);
-        lmap.put('U', 5);
-        lmap.put('V', 2);
-        lmap.put('W', 2);
-        lmap.put('X', 1);
-        lmap.put('Y', 2);
-        lmap.put('Z', 1);
-
-        return lmap;
-
+        return letterMap;
     }
 
-    // return a random letter
+    /**
+     * Get a random letter.
+     *
+     * @return a random letter.
+     */
     public static char getRandomChar() {
-        List<Character> keysAsArr = new ArrayList<Character>(lmap.keySet());
-        if (keysAsArr.size() > 0) {
+        List<char> letters = new ArrayList<char>;
+        for (char key :letterMap.keySet()) {
+            for (int i = 0; i < letterMap.get(key); i++) {
+                letters.add(key);
+            }
+        }
+        char returnLetter = ' ';
+
+        if (letters.size() > 0) {
             Random r = new Random();
-            char key = keysAsArr.get(r.nextInt(keysAsArr.size()));
-            updateStock(key);
-            return key;
-        } else {
+            returnLetter = letters.get(r.nextInt(letters.size()));
+            updateStock(returnLetter);
+        }
+        return returnLetter;
+    }
+
+    /**
+     * Get a random vowel or consonant for trading.
+     *
+     * @param getVowel True if vowel, False if consonant.
+     * @return New vowel, new consonant, or a blank character if none are left in the bag.
+     */
+    private static char getRandomChar(boolean getVowel) {
+        List<Character> keysAsArr = new ArrayList<Character>(letterMap.keySet());
+        // If there are no keys left, return ' '
+        if(keysAsArr.isEmpty()) {
             return ' ';
         }
-    }
 
-    public static char getRandomChar(int type) {
-
-        List<Character> keysAsArr = new ArrayList<Character>(lmap.keySet());
-        // 0 is vowel, 1 is consonant
-        if (keysAsArr.size() > 0) {
-            Random r = new Random();
-            if (type == 0) {
-
-                // init and populate vowelKeys
-                List<Character> vowelKeys = new ArrayList<Character>();
-                for (int i = 0; i < keysAsArr.size(); i++) {
-                    Character thisC = keysAsArr.get(i);
-                    if (isVowel(Character.toString(thisC))) {
-                        vowelKeys.add(thisC);
-                    }
+        // Else, create a list of consonants and vowels.
+        // Add the number of each consonant or vowel to the appropriate list.
+        Random r = new Random();
+        List<Character> consonants = new ArrayList<Character>();
+        List<Character> vowels = new ArrayList<Character>();
+        for (int i = 0; i < keysAsArr.size(); i++) {
+            Character c = keysAsArr.get(i);
+            if (isVowel(Character.toString(c))) {
+                for(int j = 0; j < letterMap.get(c); j++) {
+                    vowels.add(c);
                 }
-
-                // if there are vowels left
-                if (vowelKeys.size() > 0) {
-                    char key = vowelKeys.get(r.nextInt(vowelKeys.size()));
-                    updateStock(key);
-                    return key;
-                }
-
             } else {
-
-                // type == 1, so get a char instead
-                List<Character> charKeys = new ArrayList<Character>();
-                for (int i = 0; i < keysAsArr.size(); i++) {
-                    Character thisC = keysAsArr.get(i);
-                    if (!isVowel(Character.toString(thisC))) {
-                        charKeys.add(thisC);
-                    }
-
-                    // if there are chars left
-                    if (charKeys.size() > 0) {
-                        char key = charKeys.get(r.nextInt(charKeys.size()));
-                        updateStock(key);
-                        return key;
-                    }
+                for(int j = 0; j < letterMap.get(c); j++) {
+                    consonants.add(c);
                 }
             }
         }
-        // if no letter could be found, return blank
-        return ' ';
-    }
 
-
-
-    // trade for a random vowel
-    public static char tradeLetter(char cIn) {
-
-        String letter = Character.toString(cIn);
-        Character cOut = ' ';
-        // if cIn is vowel, get a consonant
-        if (isVowel(letter)) {
-
-            cOut = getRandomChar(1);
-        }
-        // otherwise, get a vowel
-        else {
-
-            cOut = getRandomChar(0);
-        }
-
-        // if cOut returned a real char, put cIn back in bag and return cOut...if cOut still blank, then return cIn
-        if (cOut != ' ') {
-            if (lmap.containsKey(cIn)) {
-                int cInCurrStock = (Integer) lmap.get(cIn);
-                lmap.put(cIn, cInCurrStock + 1);
-            } else {
-                lmap.put(cIn, 1);
+        // Attempt to get a replacement vowel or consonant, and update the stock.
+        // Return ' ' if one is not available.
+        char returnLetter = ' ';
+        if (getVowel) {
+            if (vowels.size() > 0) {
+                returnLetter = vowels.get(r.nextInt(vowels.size()));
+                updateStock(returnLetter);
             }
-            return cOut;
         } else {
-            return cIn;
+            if (consonants.size() > 0) {
+                returnLetter = consonants.get(r.nextInt(consonants.size()));
+                updateStock(returnLetter);
+            }
+        }
+
+        return returnLetter;
+    }
+
+
+    /**
+     * Trade a letter. Vowels return vowels, consonants return consonants.
+     *
+     * @param c the letter to trade
+     * @return the replacement letter
+     */
+    public static char tradeLetter(char c) {
+        Character replacement = getRandomChar(isVowel(c));
+        // if replacement returned a real char, put c back in bag and return replacement...if replacement still blank, then return c
+        if (replacement != ' ') {
+            if (letterMap.containsKey(c)) {
+                int cInCurrStock = (Integer) letterMap.get(c);
+                letterMap.put(c, cInCurrStock + 1);
+            } else {
+                letterMap.put(c, 1);
+            }
+            return replacement;
+        } else {
+            return c;
         }
     }
 
-    public static boolean isVowel(String letter) {
-        if (("AEIOU".indexOf(letter) >= 0)) {
+    /**
+     * Check if a char letter is a vowel.
+     *
+     * @param c the character to check.
+     * @return true if the character is a vowel
+     */
+    public static boolean isVowel(char c) {
+        return isVowel(Character.toString(c));
+    }
+
+    /**
+     * Check if a String letter is a vowel.
+     *
+     * @param s The String to check.
+     * @return true if the letter is a vowel.
+     */
+    public static boolean isVowel(String s) {
+        if (("AEIOU".indexOf() >= 0)) {
             return true;
         }
         return false;
     }
 
+    /**
+     * Update the stock of a letter in the LetterBag.
+     *
+     * @param key the letter to update.
+     */
     public static void updateStock(char key) {
-
-        int stock = (Integer) lmap.get(key);
+        int stock = (Integer) letterMap.get(key);
         stock--;
         if (stock == 0) {
-            lmap.remove(key);
+            letterMap.remove(key);
         } else {
-            lmap.put(key, stock);
+            letterMap.put(key, stock);
         }
-
     }
-
-
 }

@@ -30,7 +30,6 @@ import java.util.Map;
 
 /**
  * Created by jackwa on 11/29/17.
- * Created by jackwa on 11/29/17.
  */
 public class GameScreen implements Screen, InputProcessor {
 
