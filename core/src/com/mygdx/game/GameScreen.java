@@ -34,7 +34,7 @@ import java.util.Map;
 public class GameScreen implements Screen, InputProcessor {
 
     // instance variables
-    private Game game;
+    private final Game game;
 
     // viewports
     private ExtendViewport viewport;
@@ -56,7 +56,7 @@ public class GameScreen implements Screen, InputProcessor {
     private InputMultiplexer inputMP;
 
     // game logic stuff
-    private int playType;
+    private final int playType;
     private Tileset stageSet;
     private int initNumTiles;
     private com.badlogic.gdx.graphics.Texture yayboi;
@@ -121,7 +121,7 @@ public class GameScreen implements Screen, InputProcessor {
         showFeedback = false;
         tradeStock = 4;
         noNonWords = true;
-        letterCount = Constants.LETTER_COUNT;;
+        letterCount = Constants.LETTER_COUNT;
 
         // set up letter distribution
         LetterBag.initLetterMap();
@@ -328,11 +328,11 @@ public class GameScreen implements Screen, InputProcessor {
 
             if (iterator < 6) {
                 font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowOne.x + ((iterator % 6) * letterBagOffset), letterBagRowOne.y);
-            } else if (iterator >= 6 && iterator < 12) {
+            } else if (iterator < 12) {
                 font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowTwo.x + ((iterator % 6) * letterBagOffset), letterBagRowTwo.y);
-            } else if (iterator >= 12 &&  iterator < 18) {
+            } else if (iterator < 18) {
                 font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowThree.x + ((iterator % 6) * letterBagOffset), letterBagRowThree.y);
-            } else if (iterator >= 18 && iterator < 24 ){
+            } else if (iterator < 24 ){
                 font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowFour.x + ((iterator % 6) * letterBagOffset), letterBagRowFour.y);
             } else {
                 font.draw(batch, entry.getKey() + " : " + entry.getValue() + "  ", letterBagRowFive.x + ((iterator % 6) * letterBagOffset), letterBagRowFive.y);
@@ -459,7 +459,7 @@ public class GameScreen implements Screen, InputProcessor {
         return false;
     }
 
-    public void drawLetters() {
+    private void drawLetters() {
         font.getData().setScale(Constants.TILE_FONT_SIZE);
         ArrayList<Tile> tiles = stageSet.getTiles();
         for (int i = 0; i < tiles.size(); i++) {
@@ -485,11 +485,11 @@ public class GameScreen implements Screen, InputProcessor {
     * this method gets the current word
      */
     private String getCurrWord() {
-        String theWord = "";
+        StringBuilder currentWord = new StringBuilder();
         for (int i = 0; i < stageSet.getTiles().size(); i++) {
-            theWord = theWord + stageSet.getTile(i).getLetter();
+            currentWord.append(stageSet.getTile(i).getLetter());
         }
-        return theWord;
+        return currentWord.toString();
     }
 
     /*

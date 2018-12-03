@@ -92,24 +92,18 @@ public class HelpScreen implements Screen, InputProcessor {
         font.setColor(Color.BLACK);
         ApplicationType appType = Gdx.app.getType();
 
+        float width = 500;
         if (appType == ApplicationType.Android || appType == ApplicationType.iOS) {
-
-            Vector3 helpTextInScreenCoords = camera.project(new Vector3(10, Constants.WORLD_SIZE- 5, 0));
-            font.draw(batch, "--You will receive 15 sets of 7 letters each. For each set, try to make the highest-scoring word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y, textViewport.getWorldWidth() - 100 , 200, true);
-            font.draw(batch, "--Make words by arranging the letter tiles (swiping right or left). Discard unnecessary tiles by touching the 'X' button on each tile.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 75, textViewport.getWorldWidth() - 100, 200, true);
-            font.draw(batch, "--Touch the submit button to submit a word. Valid words are scored according to the value of each letter used (displayed on the letter's tile).\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 150, textViewport.getWorldWidth() - 100, 200, true);
-            font.draw(batch, "--There is a 30 point bonus for creating a 6 letter word, and a 40 point bonus for a 7 letter word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 225, textViewport.getWorldWidth() - 100, 200, true);
-            font.draw(batch, "--For each set, you have the option to trade the left-most tile 4 times. Vowels replace consonants; consonants replace vowels.", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 300, textViewport.getWorldWidth() - 100, 200, true);
-
-        } else {
-            Vector3 helpTextInScreenCoords = camera.project(new Vector3(10, Constants.WORLD_SIZE - 5, 0));
-            font.draw(batch, "--You will receive 15 sets of 7 letters each. For each set, try to make the highest-scoring word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y, 500, 200, true);
-            font.draw(batch, "--Make words by arranging the letter tiles (swiping right or left). Discard unnecessary tiles by touching the 'X' button on each tile.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 75, 500, 200, true);
-            font.draw(batch, "--Touch the submit button to submit a word. Valid words are scored according to the value of each letter used (displayed on the letter's tile).\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 150, 500, 200, true);
-            font.draw(batch, "--There is a 30 point bonus for creating a 6 letter word, and a 40 point bonus for a 7 letter word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 225, 500, 200, true);
-            font.draw(batch, "--For each set, you have the option to trade the left-most tile 4 times. Vowels replace consonants; consonants replace vowels.", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 300, 500, 200, true);
-
+            width = textViewport.getWorldWidth() - 100;
         }
+
+        Vector3 helpTextInScreenCoords = camera.project(new Vector3(10, Constants.WORLD_SIZE- 5, 0));
+        font.draw(batch, "--You will receive 15 sets of 7 letters each. For each set, try to make the highest-scoring word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y, width , 200, true);
+        font.draw(batch, "--Make words by arranging the letter tiles (swiping right or left). Discard unnecessary tiles by touching the 'X' button on each tile.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 75, width, 200, true);
+        font.draw(batch, "--Touch the submit button to submit a word. Valid words are scored according to the value of each letter used (displayed on the letter's tile).\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 150, width, 200, true);
+        font.draw(batch, "--There is a 30 point bonus for creating a 6 letter word, and a 40 point bonus for a 7 letter word.\n", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 225, width, 200, true);
+        font.draw(batch, "--For each set, you have the option to trade the left-most tile 4 times. Vowels replace consonants; consonants replace vowels.", helpTextInScreenCoords.x, helpTextInScreenCoords.y - 300, width, 200, true);
+
         batch.end();
 
         // draw button
