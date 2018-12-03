@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 /**
- * Created by jackwa on 11/30/18.
+ * Created by wyoung on 11/30/18.
  */
 public class LetterBagTest {
 
@@ -13,7 +13,6 @@ public class LetterBagTest {
                 if(c==' ') {
                     break;
                 }
-                //LetterBag.updateStock(c);
                 System.out.println(c);
                 Thread.sleep(100);
             }
