@@ -71,6 +71,7 @@ public class LetterBag {
         }
         char returnLetter = ' ';
 
+        System.out.println("There are  " + letters.size() + " letters in the bag.");
         if (letters.size() > 0) {
             Random r = new Random();
             returnLetter = letters.get(r.nextInt(letters.size()));
@@ -80,12 +81,12 @@ public class LetterBag {
     }
 
     /**
-     * Get a random vowel or consonant for trading.
+     * Trade a vowel for a consonant from the bag, and vice versa.
      *
-     * @param getVowel True if vowel, False if consonant.
-     * @return New vowel, new consonant, or a blank character if none are left in the bag.
+     * @param wasVowel True if it was a vowel, False if it was a consonant.
+     * @return The opposite of the input or a blank character if none are left in the bag.
      */
-    private static char getRandomChar(boolean getVowel) {
+    private static char tradeLetterType(boolean wasVowel) {
         List<Character> keysAsArr = new ArrayList<Character>(letterMap.keySet());
         // If there are no keys left, return ' '
         if(keysAsArr.isEmpty()) {
@@ -113,13 +114,15 @@ public class LetterBag {
         // Attempt to get a replacement vowel or consonant, and update the stock.
         // Return ' ' if one is not available.
         char returnLetter = ' ';
-        if (getVowel) {
+        if (!wasVowel) {
             if (vowels.size() > 0) {
+                System.out.println("There are  " + vowels.size() + " vowels in the bag.");
                 returnLetter = vowels.get(r.nextInt(vowels.size()));
                 updateStock(returnLetter);
             }
         } else {
             if (consonants.size() > 0) {
+                System.out.println("There are  " + consonants.size() + " consonants in the bag.");
                 returnLetter = consonants.get(r.nextInt(consonants.size()));
                 updateStock(returnLetter);
             }
@@ -136,11 +139,11 @@ public class LetterBag {
      * @return the replacement letter
      */
     public static char tradeLetter(char c) {
-        Character replacement = getRandomChar(isVowel(c));
+        Character replacement = tradeLetterType(isVowel(c));
         // if replacement returned a real char, put c back in bag and return replacement...if replacement still blank, then return c
         if (replacement != ' ') {
             if (letterMap.containsKey(c)) {
-                int cInCurrStock = (Integer) letterMap.get(c);
+                int cInCurrStock = letterMap.get(c);
                 letterMap.put(c, cInCurrStock + 1);
             } else {
                 letterMap.put(c, 1);
