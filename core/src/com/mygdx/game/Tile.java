@@ -71,7 +71,6 @@ public class Tile implements InputProcessor {
     public boolean update(float delta) {
 
         if (killed) {
-
             int index = ts.getTiles().indexOf(this);
 
             ts.getTiles().remove(this);
@@ -83,7 +82,7 @@ public class Tile implements InputProcessor {
         // if a tile needs to be moved
         if (shiftTile(ts)) {
             return true;
-        };
+        }
         return false;
 
     }
@@ -216,14 +215,8 @@ public class Tile implements InputProcessor {
                         direction = "";
                         break;
                     }
-
-
-
-
                 }
             }
-
-
         return true;
         }
         return false;

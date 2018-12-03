@@ -114,7 +114,12 @@ public class Constants {
     // timer constants
     public static final int STANDARD_TIME_ALLOTTED = 45;
 
+    // Vowels
     public static final String vowels = "AEIOU";
+
+    // Countdown constants
+    public static final int COUNT_DOWN_DELAY = 1000;
+    public static final int CONT_DOWN_PERIOD = 1000;
 
 
     private static Color toRGB(int r, int g, int b) {
