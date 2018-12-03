@@ -53,6 +53,11 @@ public class LetterBag {
         return letterMap;
     }
 
+    /**
+     * Get the entry set for the LetterMap.
+     *
+     * @return the entry set.
+     */
     public static Set<Map.Entry<Character,Integer>> getEntrySet(){
         return letterMap.entrySet();
     }
@@ -171,10 +176,7 @@ public class LetterBag {
      * @return true if the letter is a vowel.
      */
     public static boolean isVowel(String s) {
-        if (("AEIOU".indexOf(s.toUpperCase()) >= 0)) {
-            return true;
-        }
-        return false;
+        return "AEIOU".contains(s.toUpperCase());
     }
 
     /**
@@ -182,7 +184,7 @@ public class LetterBag {
      *
      * @param key the letter to update.
      */
-    public static void updateStock(char key) {
+    private static void updateStock(char key) {
         int stock = letterMap.get(key);
         System.out.println("There are " + stock + " " + key + "'s left");
         stock--;
