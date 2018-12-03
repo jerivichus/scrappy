@@ -57,7 +57,7 @@ public class LetterBag {
      * @return a random letter.
      */
     public static char getRandomChar() {
-        List<char> letters = new ArrayList<char>;
+        List<Character> letters = new ArrayList<Character>();
         for (char key :letterMap.keySet()) {
             for (int i = 0; i < letterMap.get(key); i++) {
                 letters.add(key);
@@ -162,7 +162,7 @@ public class LetterBag {
      * @return true if the letter is a vowel.
      */
     public static boolean isVowel(String s) {
-        if (("AEIOU".indexOf() >= 0)) {
+        if (("AEIOU".indexOf(s) >= 0)) {
             return true;
         }
         return false;
@@ -174,7 +174,7 @@ public class LetterBag {
      * @param key the letter to update.
      */
     public static void updateStock(char key) {
-        int stock = (Integer) letterMap.get(key);
+        int stock = letterMap.get(key);
         System.out.println("There are " + stock + " " + key + "'s left");
         stock--;
         if (stock == 0) {
