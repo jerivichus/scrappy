@@ -149,13 +149,13 @@ public class LetterBag {
     public static void updateStock(char key) {
 
         int stock = (Integer) lmap.get(key);
+        System.out.println("There are " + stock + " " + key + "'s left");
         stock--;
         if (stock == 0) {
             lmap.remove(key);
         } else {
             lmap.put(key, stock);
         }
-
     }
 
 
