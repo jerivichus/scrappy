@@ -47,13 +47,14 @@ public class ScoringTable {
         // fifteen pointers
         table.put("J", 15);
         table.put("K", 15);
-        table.put("V", 15);
         table.put("X", 15);
 
+        table.put("V", 20);
+        table.put("Z", 20);
 
         // twenty pointers
-        table.put("Q", 20);
-        table.put("Z", 20);
+        table.put("Q", 25);
+
 
 
         // init bonuses
@@ -62,6 +63,10 @@ public class ScoringTable {
         bonuses.put("7 Letter Word", 0);
         bonuses.put("Singular S", 0);
         bonuses.put("All Words", 0);
+        bonuses.put("Starts With Vowel",0);
+
+        // need to set this one to 1 for reasons found in GameScreen.submitWord()
+        bonuses.put("All Bonuses", 1);
 
 
     }
@@ -105,6 +110,12 @@ public class ScoringTable {
                 score += 5;
                 bonuses.put("Singular S", bonuses.get("Singular S") + 1);
             }
+        }
+
+        // add five point bonus a word that starts with a vowel
+        if (word.charAt(0)=='A'|| word.charAt(0)=='E'|| word.charAt(0)=='O'|| word.charAt(0)=='I'|| word.charAt(0)=='U') {
+            score += 5;
+            bonuses.put("Starts With Vowel", bonuses.get("Starts With Vowel") + 1);
         }
 
         // add bonus for using every tile

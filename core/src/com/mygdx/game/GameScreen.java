@@ -541,6 +541,14 @@ public class GameScreen implements Screen, InputProcessor {
                 scoringTable.setBonusValue("All Words", 1);
             }
 
+            // check for all bonuses
+            if (!scoringTable.getBonuses().containsValue(0)) {
+                score += 50;
+                scoringTable.setBonusValue("All Bonuses", 1);
+            } else {
+                scoringTable.setBonusValue("All Bonuses", 0);
+            }
+
             if (playType==0) {
                 int topScore = prefs.getInteger("topTimedScore", 0);
                 if (score > topScore) {
